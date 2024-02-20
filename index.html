@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Project</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+      
+        .button-container button {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: white;
+            border: 1px solid black;
+            color: black;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .clear-button {
+            background-color: black !important;
+            color: white !important;
+            border: 1px solid white !important; /* Thin white border */
+        }
+      
+        .horizontal-line {
+            border-top: 1px solid black;
+            
+            margin: 0 auto;
+        }
+        .error-message {
+            display: none;
+            color: red;
+        }
+    
+    </style>
+</head>
+<body>
+    <h1>Counter using HTML</h1>
+    <div id="countDisplay">Your Current Count is: 0</div>
+
+    <hr class="horizontal-line">
+    <div class="error-message" id="errorMessage">Cannot decrement below 0!</div>
+    <div class="button-container">
+        <button id="decrementButton">Decrement</button>
+        <button id="incrementButton">Increment</button>
+        <button class="clear-button">Clear</button>
+    </div>
+    <script>
+        let count = 0;
+        const countDisplay = document.getElementById('countDisplay');
+        const decrementButton = document.getElementById('decrementButton');
+        const errorMessage = document.getElementById('errorMessage');
+
+        function updateCount(value) {
+            count += value;
+            countDisplay.innerText = `Your Current Count is: ${count}`;
+
+            errorMessage.style.display = count < 0 ? 'block' : 'none';
+        }
+
+        document.getElementById('incrementButton').addEventListener('click', function() {
+            updateCount(1);
+        });
+
+        document.getElementById('decrementButton').addEventListener('click', function() {
+            if (count === 0) {
+                errorMessage.style.display = 'block';
+            } else {
+                updateCount(-1);
+            }
+        });
+
+        document.querySelector('.clear-button').addEventListener('click', function() {
+            count = 0;
+            countDisplay.innerText = `Your Current Count is: ${count}`;
+            errorMessage.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
